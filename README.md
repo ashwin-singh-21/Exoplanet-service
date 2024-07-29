@@ -100,7 +100,6 @@ The server will start on `http://127.0.0.1:8080`.
             "mass": 0.5,
             "type": "GasGiant"
         },
-        ...
     ]
     ```
 
