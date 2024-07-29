@@ -51,3 +51,94 @@ The microservice provides the following functionalities:
     ```sh
     docker run -n exoplanet -d -p 8080:8080 exoplanet-app 
     ```
+
+The server will start on `http://127.0.0.1:8080`.
+
+## API Endpoints
+
+### Add an Exoplanet
+
+- **URL:** `/exoplanets`
+- **Method:** `POST`
+- **Request Body:**
+    ```json
+    {
+        "name": "Planet Name",
+        "description": "Description",
+        "distance": 100,
+        "radius": 1.0,
+        "mass": 0.5, // Only for Terrestrial type
+        "type": "GasGiant" // or "Terrestrial"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "id": "123456",
+        "name": "Planet Name",
+        "description": "Description",
+        "distance": 100,
+        "radius": 1.0,
+        "mass": 0.5,
+        "type": "GasGiant"
+    }
+    ```
+
+### List Exoplanets
+
+- **URL:** `/exoplanets`
+- **Method:** `GET`
+- **Response:**
+    ```json
+    [
+        {
+            "id": "123456",
+            "name": "Planet Name",
+            "description": "Description",
+            "distance": 100,
+            "radius": 1.0,
+            "mass": 0.5,
+            "type": "GasGiant"
+        },
+        ...
+    ]
+    ```
+
+### Update Exoplanet
+
+- **URL:** `/exoplanets/{id}`
+- **Method:** `PUT`
+- **Request Body:**
+    ```json
+    {
+        "name": "Updated Name",
+        "description": "Updated Description",
+        "distance": 200,
+        "radius": 2.0,
+        "mass": 1.0,
+        "type": "Terrestrial"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "id": "123456",
+        "name": "Updated Name",
+        "description": "Updated Description",
+        "distance": 200,
+        "radius": 2.0,
+        "mass": 1.0,
+        "type": "Terrestrial"
+    }
+    ```
+    
+### Fuel Estimation
+
+- **URL:** `/exoplanets/{id}/fuel?crew={crew-capacity}`
+- **Method:** `GET`
+- **Response:**
+    ```json
+    {
+        "estimated_fuel": 123.45
+    }
+    ```
