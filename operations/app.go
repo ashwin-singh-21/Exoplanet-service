@@ -6,28 +6,19 @@ import (
 	"exo-planet-app/utils"
 	"fmt"
 	"log"
-	"math/rand"
 	"net/http"
 	"strconv"
-	"time"
 
+	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 )
 
-func init() {
-	rand.Seed(time.Now().UnixNano())
-}
-
 func generateId() string {
-	return strconv.Itoa(rand.Intn(100000))
+	return uuid.New().String()
 }
 
 // AddExoPlanet adds an exo-planet
 func AddExoPlanet(w http.ResponseWriter, r *http.Request) {
-
-	if r.Method != "POST" {
-		utils.HandleHttpMethodErr(w)
-	}
 
 	fmt.Println("Received a request to add an Exoplanet!")
 
@@ -56,10 +47,6 @@ func AddExoPlanet(w http.ResponseWriter, r *http.Request) {
 // ListExoPlanets gets a list of all available exoplanets.
 func ListExoPlanets(w http.ResponseWriter, r *http.Request) {
 
-	if r.Method != "GET" {
-		utils.HandleHttpMethodErr(w)
-	}
-
 	log.Println("Received a request to list all the exoplanets!")
 
 	exoplanetList := make([]models.ExoPlanet, 0, len(models.ExoPlanets))
@@ -77,10 +64,6 @@ func ListExoPlanets(w http.ResponseWriter, r *http.Request) {
 
 // GetExoPlanet returns an exoplanet against the requested id
 func GetExoPlanet(w http.ResponseWriter, r *http.Request) {
-
-	if r.Method != "GET" {
-		utils.HandleHttpMethodErr(w)
-	}
 
 	log.Println("Received a request to get details of an exoplanet")
 
@@ -105,10 +88,6 @@ func GetExoPlanet(w http.ResponseWriter, r *http.Request) {
 
 // UpdateExoPlanet updates the details of an exoplanet against requested id
 func UpdateExoPlanet(w http.ResponseWriter, r *http.Request) {
-
-	if r.Method != "PUT" {
-		utils.HandleHttpMethodErr(w)
-	}
 
 	params := mux.Vars(r)
 	id := params["id"]
@@ -154,10 +133,6 @@ func UpdateExoPlanet(w http.ResponseWriter, r *http.Request) {
 // DeleteExoPlanet deletes the requested exoplanet from the database
 func DeleteExoPlanet(w http.ResponseWriter, r *http.Request) {
 
-	if r.Method != "DELETE" {
-		utils.HandleHttpMethodErr(w)
-	}
-
 	param := mux.Vars(r)
 	id := param["id"]
 
@@ -179,10 +154,6 @@ func DeleteExoPlanet(w http.ResponseWriter, r *http.Request) {
 
 // FuelEstimation calculate the amount of fuel required to reach an exoplanet
 func FuelEstimation(w http.ResponseWriter, r *http.Request) {
-
-	if r.Method != "GET" {
-		utils.HandleHttpMethodErr(w)
-	}
 
 	params := mux.Vars(r)
 	id := params["id"]
